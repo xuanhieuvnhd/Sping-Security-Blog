@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout::head">
+    <meta charset="UTF-8">
+    <title>Tạo mới thể loại blog</title>
+</head>
+<body>
+<p><h1 class="title">Tạo mới thể loại blog</h1> </p>
+<p>
+    <a href="/usercategory">Quay lại danh sách blog</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+
+<form th:action="@{/adminsave-category}" th:object="${category}" method="post">
+    <table id="alex" border="1">
+        <tr>
+            <td>Tên: </td>
+            <td><input type="text" placeholder="Nhập tên thể loại blog" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Tạo"></td>
+        </tr>
+    </table>
+</form>
+</body>
+<footer th:replace="/layout :: footer"></footer>
+</html>

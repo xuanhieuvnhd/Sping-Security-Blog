@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout::head">
+    <meta charset="UTF-8">
+    <title>Cập nhật blog</title>
+</head>
+<body>
+<h1 class="title">Cập nhật blog</h1>
+<p><a href="/userlist">Quay lại danh sách blog</a></p>
+<th:block th:if="${message}">
+    <p th:text="${message}">
+</th:block>
+<form th:action="@{/adminupdate-blog}" th:object="${blog}" method="post">
+    <table id="alex" border="1">
+        <td><input type="hidden" th:field="*{id}"></td>
+        <tr>
+            <td>Tác giả: </td>
+            <td><input type="text" th:field="*{people}"></td>
+        </tr>
+        <tr>
+            <td>Tiêu đề: </td>
+            <td><input  type="text" th:field="*{title}"></td>
+        </tr>
+        <tr>
+            <td>Tóm tắt: </td>
+            <td><input type="text"  th:field="*{summary}"></td>
+        </tr>
+        <tr>
+            <td>Nội dung: </td>
+            <td><textarea style="height: 200px; width: 100%" type="text" th:field="*{content}"></textarea></td>
+        </tr>
+        <tr>
+            <td>Ngày tạo: </td>
+            <td><input type="text"  th:field="*{dates}"></td>
+        </tr>
+        <tr>
+            <td>Thể loại:</td>
+            <td>
+                <select name="category">
+                    <option th:each="c : ${categories}"
+                            th:value="${c.id}"
+                            th:text="${c.name}"
+                            th:selected="(${id} == *{category.id})"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Cập nhật"></td>
+        </tr>
+    </table>
+</form>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

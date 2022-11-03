@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout::head">
+    <meta charset="UTF-8">
+    <title>Xoá thể loại blog</title>
+</head>
+<body>
+<p><h1 class="title">Bạn có chắc?</h1></p>
+<p><a href="/usercategory">Quay lại danh sách thể loại blog</a></p>
+<div>
+    <form th:action="@{/adminremove-category}" th:object="${category}" method="post">
+        <table id="alex" border="1">
+            <tr>
+                <td>Tên:</td>
+                <td th:text="${category.name}"></td>
+                <td><input type="hidden" th:field="*{id}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Xoá"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

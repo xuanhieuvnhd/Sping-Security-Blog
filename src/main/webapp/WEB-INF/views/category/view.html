@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="/layout::head">
+    <meta charset="UTF-8">
+    <title>Xem</title>
+</head>
+<body>
+<a th:href="@{/logout}">Đăng xuất</a>
+<p><h1 class="title">Xem thể loại: <span th:text="${category.name}"></span> </h1> </p>
+<p><a href="/usercategory">Danh sách thể loại</a> </p>
+<table id="alex" border="1">
+    <tr>
+        <td>Tiêu đề</td>
+        <td>Tác giả </td>
+        <td>Tóm tắt </td>
+        <td>Ngày tạo </td>
+        <td>Thể loại</td>
+    </tr>
+    <th:block th:each="blog : ${blogs}">
+        <tr>
+            <td><a th:href="@{/userread/__${blog.id}__}"  th:text="${blog.title}"></a></td>
+            <td th:text="${blog.people}"></td>
+            <td th:text="${blog.summary}"></td>
+            <td th:text="${blog.dates}"></td>
+            <td><a th:text="${blog.category.name}" th:href="@{/userview-category/__${blog.category.id}__}"></a></td>
+            <div sec:authorize="hasRole('ADMIN')">
+                <td><a th:href="@{/adminedit/__${blog.id}__}">Sửa</a> </td>
+                <td><a th:href="@{/adminremove/__${blog.id}__}">Xoá</a> </td>
+                <td><a th:href="@{/userread/__${blog.id}__}">Thêm nữa....</a> </td>
+            </div>
+        </tr>
+    </th:block>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

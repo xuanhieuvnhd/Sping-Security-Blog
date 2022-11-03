@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="/layout::head">
+    <meta charset="UTF-8">
+    <title>Thể loại</title>
+</head>
+<body>
+<a th:href="@{/logout}">Đăng xuất</a>
+<h1 class="title">Danh sách thể loại</h1>
+<div sec:authorize="hasRole('ADMIN')">
+    <p><a href="/admincreate-category">Tạo thể loại blog</a> </p>
+</div>
+<p><a href="/userlist">Xem tất cả blog</a> </p>
+<div>
+    <table id="alex" border="1">
+        <tr>
+            <td>Tên</td>
+            <div sec:authorize="hasRole('ADMIN')"><td>Sửa</td>
+                <td>Xoá</td></div>
+        </tr>
+        <th:block th:each="category : ${categories}">
+            <tr>
+                <td><a th:text="${category.name}" th:href="@{/userview-category/__${category.id}__}"></a></td>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <td><a th:href="@{/adminedit-category/__${category.id}__}">sửa</a> </td>
+                    <td><a th:href="@{/adminremove-category/__${category.id}__}">xoá</a> </td>
+                </div>
+            </tr>
+        </th:block>
+    </table>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

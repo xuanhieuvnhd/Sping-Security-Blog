@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout::head">
+    <meta charset="UTF-8">
+    <title>Xoá blog</title>
+</head>
+<body>
+<h1 class="title">Bạn có chắc?</h1>
+<p><a href="/userlist">Quay lại danh sách blog</a> </p>
+<form th:action="@{/admindelete-blog}" th:object="${blog}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <table id="alex" border="1">
+        <tr>
+            <td>Id:</td>
+            <td th:text="${blog.id}"></td>
+        </tr>
+        <tr>
+            <td>Tác giả:</td>
+            <td th:text="${blog.people}"></td>
+        </tr>
+        <tr>
+            <td>Tiêu đề:</td>
+            <td th:text="${blog.title}"></td>
+        </tr>
+        <tr>
+            <td>Tóm tắt:</td>
+            <td th:text="${blog.summary}"></td>
+        </tr>
+        <tr>
+            <td>Ngày tạo:</td>
+            <td th:text="${blog.dates}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Xoá"></td>
+        </tr>
+    </table>
+</form>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

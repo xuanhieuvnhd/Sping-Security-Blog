@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="/layout::head">
+    <meta charset="UTF-8">
+    <title>Danh sách blog</title>
+</head>
+<body>
+<a th:href="@{/logout}">Đăng xuất</a>
+<h1 class="title">Danh sách blog hiện tại</h1>
+<div sec:authorize="hasRole('ADMIN')">
+    <p><a href="/admincreate">Tạo mới blog</a> </p>
+</div>
+<p>
+    <a href="/usercategory">Quay lại danh sách thể loại blog</a>
+</p>
+<form>
+    Tìm kiếm theo tên blog:
+    <input name="s" type="text"/>
+    <input type="submit" value="Tìm"/>
+</form><br/>
+<table id="alex" border="1px">
+    <div>
+        <tr>
+            <td>Tiêu đề </td>
+            <td>Tác giả </td>
+            <td>Tóm tắt </td>
+            <td>Ngày tạo </td>
+            <td>Thể loại</td>
+
+        </tr>
+        <div th:each="blog : ${blogs}">
+            <tr>
+                <td><a th:href="@{/userread/__${blog.id}__}"  th:text="${blog.title}"></a></td>
+                <td th:text="${blog.people}"></td>
+                <td th:text="${blog.summary}"></td>
+                <td th:text="${blog.dates}"></td>
+                <td><a th:text="${blog.category.name}" th:href="@{/userview-category/__${blog.category.id}__}"></a></td>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <td><a th:href="@{/adminedit/__${blog.id}__}">Sửa</a> </td>
+                    <td><a th:href="@{/adminremove/__${blog.id}__}">Xoá</a> </td>
+                </div>
+            </tr>
+        </div>
+    </div>
+</table>
+<div>
+    <a th:href="@{'/list'(page=${blogs.number - 1})}" th:if="${blogs.hasPrevious()}">Trang trước</a>
+    <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
+    <a th:href="@{'/list'(page=${blogs.number + 1})}" th:if="${blogs.hasNext()}">Trang sau</a>
+</div>
+</body>
+<footer th:replace="/layout :: footer"></footer>
+</html>

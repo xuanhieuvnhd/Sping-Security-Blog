@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout::head">
+    <meta charset="UTF-8">
+    <title th:text="${blog.title}"></title>
+</head>
+<body id="alex">
+<a th:href="@{/logout}">Logout</a>
+<center><h1 th:text="${blog.title}"></h1> </center>
+<p><a href="/userlist">Quay lại danh sách blog</a> </p>
+<p><h4><a th:text="${blog.category.name}"
+          th:href="@{/userview-category/__${blog.category.id}__}"></a></h4></p>
+<p><h5 th:text="${blog.dates}"></h5></p>
+<h3><p><a th:text="${blog.content}"></a></p></h3>
+</body>
+<footer th:replace="/layout :: footer"></footer>
+</html>
